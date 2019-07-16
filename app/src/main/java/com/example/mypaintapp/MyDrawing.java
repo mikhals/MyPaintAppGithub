@@ -20,6 +20,7 @@ public class MyDrawing implements Cloneable {
     }
 
     void setColor(int color){
+        int test;
         if(color==0){
             paint.setColor(Color.BLUE);
         }else{
