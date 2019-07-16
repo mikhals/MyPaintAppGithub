@@ -3,46 +3,43 @@ package com.example.mypaintapp;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 
-public class MyDrawing implements Cloneable {
-    int x=0,y=0;
-    int w=50,h=50;
-    Paint paint = new Paint();
-    Canvas canvas;
+public class MyDrawing {
+    int x,y,w,h,fillColor,lineColor,outlineWidth;
+    boolean isSelected;
+    Point pivot;
+    Paint paint;
 
-    public MyDrawing(int x,int y,Canvas canvas){
-        setCanvas(canvas);
-        this.x = x;
-        this.y = y;
-        setColor(1);
-        paint.setStyle(Paint.Style.STROKE);
+    public MyDrawing(){
+        x = y = 0;
+        w = h = 40;
+        outlineWidth = 2;
+        fillColor = Color.WHITE;
+        lineColor = Color.BLACK;
+        pivot = new Point();
+        paint = new Paint();
 
     }
 
-    void setColor(int color){
-        int test;
-        if(color==0){
-            paint.setColor(Color.BLUE);
-        }else{
-            paint.setColor(Color.GREEN);
-        }
-//        paint.setColor();
+    void draw(Canvas canvas){
+        Paint tmp = new Paint();
+        tmp.setColor(Color.GREEN);
+        canvas.drawRect(x-2,y-2,x+w+2,y+h+2,tmp);
     }
 
-    public void setH(int h) {
-        this.h = h;
+    void setSize(int i){
+        this.w = this.h = i;
     }
 
-    void draw(){
-        canvas.drawCircle(x,y,h,paint);
+    void setCoordinate(int x, int y){
+        this.x = x;this.y=y;
     }
 
-    public void setCanvas(Canvas canvas) {
-        this.canvas = canvas;
+    void setPaint(Paint paint){
+        this.paint=paint;
     }
 
-    void set(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
+
+
 }

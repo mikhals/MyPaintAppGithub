@@ -1,22 +1,26 @@
 package com.example.mypaintapp;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 
-public class MyRectangle extends MyDrawing {
-
-    public MyRectangle(int x, int y, MyCanvas canvas){
-        super(x, y, canvas);
-        this.x = x;
-        this.y = y;
-        setColor(1);
-        paint.setStyle(Paint.Style.STROKE);
-
+public class MyRectangle extends MyDrawing{
+    public MyRectangle(){
+        super();
     }
 
     @Override
-    void draw() {
+    void draw(Canvas canvas) {
+//        super.draw(canvas);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(lineColor);
+        canvas.drawRect(x-outlineWidth,y-outlineWidth,x+w+outlineWidth,y+h+outlineWidth,paint);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(fillColor);
         canvas.drawRect(x,y,x+w,y+h,paint);
+
     }
+
+
+
 }

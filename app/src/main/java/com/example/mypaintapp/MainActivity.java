@@ -2,19 +2,16 @@ package com.example.mypaintapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import static com.example.mypaintapp.R.id.canvas;
-
 public class MainActivity extends AppCompatActivity {
     Mediator mediator = new Mediator();
     SeekBar seekBar;
-    MyCanvas canvas;
+    CanvasView canvasView;
     Button button,button2;
 
     @Override
@@ -23,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
         button2 = findViewById(R.id.button2);
-        canvas = (MyCanvas) findViewById(R.id.canvas);
+        canvasView = findViewById(R.id.canvas);
         seekBar = findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                canvas.setcH(i);
+                canvasView.setcH(i);
+                canvasView.setSize(i);
                 button.setText(String.valueOf(i));
 
             }
@@ -47,16 +45,19 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                canvas.setCurrentDrawing(new MyDrawing(0,0,canvas));
-                canvas.changeColor();
+
+//                canvasView.setCurrentDrawing(new MyDrawing(0,0, canvasView));
+                canvasView.changeColor();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                canvas.setCurrentDrawing(new MyRectangle(0,0,canvas));
+                canvasView.setPaint();
+                canvasView.reset();
+//                canvasView.setCurrentDrawing(new MyRectangle(0,0, canvasView));
             }
         });
-//        setContentView(new MyCanvas(this,mediator, canvas));
+//        setContentView(new MyCanvas(this,mediator, canvasView));
     }
 }
