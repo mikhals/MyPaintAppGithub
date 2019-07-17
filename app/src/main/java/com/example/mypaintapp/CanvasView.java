@@ -12,15 +12,16 @@ import android.view.View;
 import java.util.Vector;
 
 public class CanvasView extends View {
-    Vector<Rect> rects = new Vector<>();
-    Vector<MyDrawing> drawings = new Vector<>();
-    Canvas canvas;
+
     Mediator mediator;
     Paint paint;
     int cH = 40;
 
     public CanvasView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
+        setBackgroundColor(Color.WHITE);
+        mediator = new Mediator(this);
+//        setBackgroundColor(Color.rgb(230,230,230));
         paint = new Paint();
         paint.setColor(Color.BLUE);
     }
@@ -42,10 +43,13 @@ public class CanvasView extends View {
 //            rect.bottom=cH+rect.left;
 //            canvas.drawRect(rect,paint);
 //        }
-
-        for(MyDrawing drawing: drawings){
-            drawing.draw(canvas);
+        for(MyDrawing d:mediator.drawings){
+            d.draw(canvas);
         }
+
+//        for(MyDrawing drawing: drawings){
+//            drawing.draw(canvas);
+//        }
     }
 
     void repaint(){
@@ -55,30 +59,32 @@ public class CanvasView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int x=(int)event.getX(),y=(int)event.getY();
-        int w=40;
-//        rectangles.add(new MyDrawing((int)event.getX(),(int)event.getY(),canvas));
-        rects.add(new Rect(x,y,x+w,y+cH));
-        MyRectangle rect = new MyRectangle();
-        rect.setCoordinate(x,y);
-        drawings.add(rect);
-        repaint();
+
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                int w=40;
+                MyDrawing rect = new MyRectangle();
+                rect.setCoordinate(x,y);
+                mediator.addDrawing(rect);
+                repaint();
+                return true;
+
+            case MotionEvent.ACTION_MOVE:
+                rect = mediator.getLastDrawing();
+                System.out.println(x);
+                rect.setSize(x - rect.pivot.x,y - rect.pivot.y);
+                repaint();
+
+            case MotionEvent.ACTION_UP:
+        }
+
+
+
 
 
 
 
         return false ;
-    }
-
-    void changeColor(){
-        for(MyDrawing d:drawings){
-            if(d.fillColor==Color.BLUE){
-                d.fillColor=Color.GREEN;
-            }else{
-                d.fillColor=Color.BLUE;
-            }
-        }
-        repaint();
-
     }
 
     public void setcH(int cH) {
@@ -87,24 +93,14 @@ public class CanvasView extends View {
     }
 
     void reset(){
-        rects.removeAllElements();
-        drawings.removeAllElements();
+        mediator.drawings.removeAllElements();
         invalidate();
     }
 
     void setSize(int i){
-        for(MyDrawing d: drawings){
+        for(MyDrawing d: mediator.drawings){
             d.setSize(i);
 
-        }
-        repaint();
-    }
-
-    void setPaint(){
-        for(MyDrawing d: drawings){
-            Paint p = new Paint();
-            p.setStyle(Paint.Style.STROKE);
-            d.setPaint(p);
         }
         repaint();
     }

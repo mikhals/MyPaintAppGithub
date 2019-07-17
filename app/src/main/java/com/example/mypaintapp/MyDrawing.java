@@ -32,8 +32,11 @@ public class MyDrawing {
         this.w = this.h = i;
     }
 
+    void setSize(int w,int h){this.w=w;this.h=h;}
+
     void setCoordinate(int x, int y){
         this.x = x;this.y=y;
+        pivot.set(x,y);
     }
 
     void setPaint(Paint paint){

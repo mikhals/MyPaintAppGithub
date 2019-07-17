@@ -2,17 +2,21 @@ package com.example.mypaintapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Mediator mediator = new Mediator();
+    Mediator mediator;
     SeekBar seekBar;
     CanvasView canvasView;
     Button button,button2;
+    Switch switch1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.button2);
         canvasView = findViewById(R.id.canvas);
         seekBar = findViewById(R.id.seekBar);
+        switch1 = findViewById(R.id.switch1);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -47,14 +52,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 //                canvasView.setCurrentDrawing(new MyDrawing(0,0, canvasView));
-                canvasView.changeColor();
+                seekBar.setVisibility(View.VISIBLE);
+                switch1.setVisibility(View.INVISIBLE);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                canvasView.setPaint();
                 canvasView.reset();
+                seekBar.setVisibility(View.INVISIBLE);
+                switch1.setVisibility(View.VISIBLE);
+                try{
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    startActivity(intent);
+                }catch (ActivityNotFoundException e){
+                    System.out.println(e);
+                }
 //                canvasView.setCurrentDrawing(new MyRectangle(0,0, canvasView));
             }
         });
