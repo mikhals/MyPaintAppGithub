@@ -9,9 +9,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+
 import java.util.Vector;
 
 public class CanvasView extends View {
+
 
     Mediator mediator;
     Paint paint;

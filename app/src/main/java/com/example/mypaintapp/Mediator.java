@@ -1,6 +1,7 @@
 package com.example.mypaintapp;
 
 import android.graphics.Canvas;
+import android.widget.TextView;
 
 import java.util.Enumeration;
 import java.util.Vector;
@@ -9,6 +10,7 @@ public class Mediator {
     Vector<MyDrawing> drawings,selectedDrawings;
     CanvasView canvasView;
     State state;
+    TextView statusbar;
 
     public Mediator(CanvasView canvasView){
         this.canvasView = canvasView;
@@ -65,5 +67,13 @@ public class Mediator {
         if(state!=null){
             state.touchMove(x,y);
         }
+    }
+
+    public void setStatusbar(TextView statusbar) {
+        this.statusbar = statusbar;
+    }
+
+    void setStatusText(String s){
+        statusbar.setText(s);
     }
 }
