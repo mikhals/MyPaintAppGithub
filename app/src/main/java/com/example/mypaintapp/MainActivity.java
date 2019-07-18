@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Mediator mediator;
     SeekBar seekBar;
     CanvasView canvasView;
-    Button button,button2;
+    Button button,button2,btnOval;
     Switch switch1;
     TextView statusText;
     int time_pressed;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         seekBar = findViewById(R.id.seekBar);
         switch1 = findViewById(R.id.switch1);
         statusText = findViewById(R.id.textView);
+        btnOval = findViewById(R.id.oval_button);
 
         System.out.println("this");
 
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(e);
                 }
 //                canvasView.setCurrentDrawing(new MyRectangle(0,0, canvasView));
+            }
+        });
+        btnOval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediator.setState(new OvalState(mediator));
             }
         });
 //        setContentView(new MyCanvas(this,mediator, canvasView));
