@@ -36,6 +36,9 @@ public class MyDrawing {
 
     void setCoordinate(int x, int y){
         this.x = x;this.y=y;
+    }
+
+    void setPivot(int x, int y){
         pivot.set(x,y);
     }
 

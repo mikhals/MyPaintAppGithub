@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">MyPaintApp</string>
-    <string name="changecolor_button">Change Color</string>
+    <string name="rectangle_button">Rectangle</string>
     <string name="reset_button">Reset</string>
 </resources>
