@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,16 +18,24 @@ public class MainActivity extends AppCompatActivity {
     CanvasView canvasView;
     Button button,button2;
     Switch switch1;
+    TextView statusText;
+    int time_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        time_pressed=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
         button2 = findViewById(R.id.button2);
         canvasView = findViewById(R.id.canvas);
+        mediator = canvasView.getMediator();
         seekBar = findViewById(R.id.seekBar);
         switch1 = findViewById(R.id.switch1);
+        statusText = findViewById(R.id.textView);
+
+        System.out.println("this");
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -50,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediator.setState(new RectState(mediator));
+                if(mediator == mediator.state.getMediator()){
+                    statusText.setText("btn 1 Same");
+                }
 
 //                canvasView.setCurrentDrawing(new MyDrawing(0,0, canvasView));
                 seekBar.setVisibility(View.VISIBLE);
@@ -59,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mediator == mediator.state.getMediator()){
+                    System.out.println(mediator.state.mediator.state);
+                    statusText.setText("btn2 Same");
+                }
                 canvasView.reset();
                 seekBar.setVisibility(View.INVISIBLE);
                 switch1.setVisibility(View.VISIBLE);

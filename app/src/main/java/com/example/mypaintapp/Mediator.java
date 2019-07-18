@@ -8,11 +8,13 @@ import java.util.Vector;
 public class Mediator {
     Vector<MyDrawing> drawings,selectedDrawings;
     CanvasView canvasView;
+    State state;
 
     public Mediator(CanvasView canvasView){
         this.canvasView = canvasView;
         drawings = new Vector<>();
         selectedDrawings = new Vector<>();
+        state = null;
     }
 
     public void addDrawing(MyDrawing d){
@@ -37,5 +39,31 @@ public class Mediator {
 
     public MyDrawing getLastDrawing(){
         return drawings.lastElement();
+    }
+
+    public void setState(State state) {
+        this.state = state;
+        System.out.println(state);
+
+    }
+
+    void touchDown(int x, int y){
+        System.out.println(state);
+//
+//        RectState rectS = new RectState(this);
+//        setState(rectS);
+//        state.touchDown(x,y);
+
+        if(state!=null){
+            state.touchDown(x,y);
+        }
+    }
+
+    void touchUp(int x, int y){}
+
+    void touchMove(int x, int y){
+        if(state!=null){
+            state.touchMove(x,y);
+        }
     }
 }

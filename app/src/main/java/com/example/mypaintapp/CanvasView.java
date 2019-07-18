@@ -62,18 +62,11 @@ public class CanvasView extends View {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                int w=40;
-                MyDrawing rect = new MyRectangle();
-                rect.setCoordinate(x,y);
-                mediator.addDrawing(rect);
-                repaint();
+                mediator.touchDown(x,y);
                 return true;
 
             case MotionEvent.ACTION_MOVE:
-                rect = mediator.getLastDrawing();
-                System.out.println(x);
-                rect.setSize(x - rect.pivot.x,y - rect.pivot.y);
-                repaint();
+                mediator.touchMove(x,y);
 
             case MotionEvent.ACTION_UP:
         }
@@ -105,7 +98,12 @@ public class CanvasView extends View {
         repaint();
     }
 
-//    public void setCurrentDrawing(MyDrawing currentDrawing) {
+    public Mediator getMediator() {
+        return mediator;
+    }
+
+
+    //    public void setCurrentDrawing(MyDrawing currentDrawing) {
 //        this.currentDrawing = currentDrawing;
 //    }
 }
