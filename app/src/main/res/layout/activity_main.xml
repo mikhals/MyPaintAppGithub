@@ -28,8 +28,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/bottomHSV">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_reset"
+                android:src="@drawable/new_page_icon"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/selectButton"
+                android:src="@drawable/select"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/color"
+                android:id="@+id/colorButton"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
     <HorizontalScrollView
+        android:id="@+id/bottomHSV"
         android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,22 +105,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-
             <ImageButton
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button_reset"
-                android:src="@drawable/new_page_icon"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
-
-            <ImageButton
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/color"
-                android:id="@+id/colorButton"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:src="@drawable/star_icon"
+                android:id="@+id/starButton"/>
+
+
 
 
         </LinearLayout>

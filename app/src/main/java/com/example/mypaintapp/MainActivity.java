@@ -1,11 +1,13 @@
 package com.example.mypaintapp;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
@@ -15,10 +17,11 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnOval = findViewById(R.id.oval_button);
         btnColor = findViewById(R.id.colorButton);
         btnHenda = findViewById(R.id.hendaButton);
+        btnStar = findViewById(R.id.starButton);
+        btnSelect = findViewById(R.id.selectButton);
         mediator.setStatusbar(statusText);
 
 
@@ -46,8 +51,20 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                canvasView.reset();
-                mediator.setStatusText("Reset");
+                builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Create new canvas?").setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                canvasView.reset();
+                                mediator.setStatusText("New canvas created");
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).create().show();
             }
         });
         btnOval.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +85,21 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             public void onClick(View view) {
                 mediator.setState(new HendaState(mediator));
                 mediator.setStatusText("Hendacagonal");
+            }
+        });
+        btnStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do something
+                mediator.setState(new StarState(mediator));
+                mediator.setStatusText("Star");
+            }
+        });
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do
+                mediator.setStatusText("Select drawing(s)");
             }
         });
     }
