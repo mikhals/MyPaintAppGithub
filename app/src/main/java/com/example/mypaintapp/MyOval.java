@@ -18,5 +18,9 @@ public class MyOval extends MyDrawing {
         paint.setColor(fillColor);
         canvas.drawOval(x,y,x+w,y+h,paint);
 
+        if(isSelected){
+            super.draw(canvas);
+        }
+
     }
 }

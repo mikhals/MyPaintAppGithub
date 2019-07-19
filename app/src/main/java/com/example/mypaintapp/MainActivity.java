@@ -87,6 +87,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 mediator.setStatusText("Hendacagonal");
             }
         });
+        btnHenda.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Custom polygon");
+                return true;
+            }
+        });
         btnStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

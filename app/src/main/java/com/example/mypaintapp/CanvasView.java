@@ -41,7 +41,16 @@ public class CanvasView extends View {
 //            rect.bottom=cH+rect.left;
 //            canvas.drawRect(rect,paint);
 //        }
+
+
         for(MyDrawing d:mediator.drawings){
+            for(MyDrawing selected:mediator.selectedDrawings){
+                if(mediator.drawings.contains(selected)){
+                    selected.setSelected(true);
+                }else {
+                    selected.setSelected(false);
+                }
+            }
             d.draw(canvas);
         }
 

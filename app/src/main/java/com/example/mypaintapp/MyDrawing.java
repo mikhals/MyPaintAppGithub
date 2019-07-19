@@ -5,13 +5,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import java.security.Signature;
+
 public class MyDrawing {
     int x,y,w,h,fillColor,lineColor,outlineWidth;
     boolean isSelected;
     Point pivot;
     Paint paint;
+    int SIZE = 25;
 
     public MyDrawing(){
+        isSelected = false;
         x = y = 0;
         w = h = 40;
         outlineWidth = 5;
@@ -24,8 +28,16 @@ public class MyDrawing {
 
     void draw(Canvas canvas){
         Paint tmp = new Paint();
-        tmp.setColor(Color.GREEN);
-        canvas.drawRect(x-2,y-2,x+w+2,y+h+2,tmp);
+        tmp.setColor(Color.BLACK);
+        canvas.drawRect(x - SIZE/2,y - SIZE/2,x+ SIZE/2,y+ SIZE/2,tmp);
+        canvas.drawRect(x - SIZE/2 + w/2,y - SIZE/2,x+ SIZE/2 + w/2,y+ SIZE/2,tmp);
+        canvas.drawRect(x - SIZE/2 + w,y - SIZE/2,x+ SIZE/2 + w,y+ SIZE/2,tmp);
+        canvas.drawRect(x - SIZE/2,y - SIZE/2 + h/2,x+ SIZE/2,y+ SIZE/2 + h/2,tmp);
+        canvas.drawRect(x - SIZE/2 + w/2,y - SIZE/2 + h/2,x+ SIZE/2 +w/2,y+ SIZE/2 + h/2,tmp);
+        canvas.drawRect(x - SIZE/2 + w,y - SIZE/2 + h/2,x+ SIZE/2 + w,y+ SIZE/2 + h/2,tmp);
+        canvas.drawRect(x - SIZE/2,y - SIZE/2 + h,x+ SIZE/2,y+ SIZE/2 + h,tmp);
+        canvas.drawRect(x - SIZE/2 + w/2,y - SIZE/2 + h,x+ SIZE/2 + w/2,y+ SIZE/2 + h,tmp);
+        canvas.drawRect(x - SIZE/2 + w,y - SIZE/2 + h,x+ SIZE/2 + w,y+ SIZE/2 + h,tmp);
     }
 
     void setSize(int i){
@@ -46,6 +58,7 @@ public class MyDrawing {
         this.paint=paint;
     }
 
-
-
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }

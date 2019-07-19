@@ -35,6 +35,10 @@ public class MyHendacagonal extends MyDrawing {
 //
 //        canvas.drawPath(path, paint);
 
+        if(isSelected){
+            super.draw(canvas);
+        }
+
 
 
 

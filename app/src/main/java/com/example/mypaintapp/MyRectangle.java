@@ -19,6 +19,10 @@ public class MyRectangle extends MyDrawing{
         paint.setColor(fillColor);
         canvas.drawRect(x,y,x+w,y+h,paint);
 
+        if(isSelected){
+            super.draw(canvas);
+        }
+
     }
 
 
