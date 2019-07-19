@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ColorPickerDialog.newBuilder().setColor(Color.BLUE).setDialogId(2).show(activity);
+                ColorPickerDialog.newBuilder().setColor(Color.WHITE).setDialogId(2).show(activity);
             }
         });
         btnHenda.setOnClickListener(new View.OnClickListener() {
