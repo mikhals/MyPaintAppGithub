@@ -1,18 +1,12 @@
 package com.example.mypaintapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
@@ -21,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor;;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
@@ -38,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         statusText = findViewById(R.id.textView);
         btnOval = findViewById(R.id.oval_button);
         btnColor = findViewById(R.id.colorButton);
+        btnHenda = findViewById(R.id.hendaButton);
         mediator.setStatusbar(statusText);
 
 
@@ -68,6 +63,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 ColorPickerDialog.newBuilder().setColor(Color.BLUE).setDialogId(2).show(activity);
             }
         });
+        btnHenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediator.setState(new HendaState(mediator));
+                mediator.setStatusText("Hendacagonal");
+            }
+        });
     }
 
 
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 mediator.setStatusText("Color changed");
                 mediator.getLastDrawing().fillColor = color;
                 mediator.repaint();
+            }else{
+                mediator.setStatusText("Drawings is empty");
             }
 
         }
@@ -85,6 +89,5 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
     @Override
     public void onDialogDismissed(int dialogId) {
-
     }
 }

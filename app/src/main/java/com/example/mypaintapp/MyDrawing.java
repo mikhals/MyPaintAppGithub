@@ -14,7 +14,7 @@ public class MyDrawing {
     public MyDrawing(){
         x = y = 0;
         w = h = 40;
-        outlineWidth = 2;
+        outlineWidth = 5;
         fillColor = Color.WHITE;
         lineColor = Color.BLACK;
         pivot = new Point();

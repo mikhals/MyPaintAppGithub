@@ -30,6 +30,7 @@
 
 
     <HorizontalScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -60,6 +61,15 @@
                 style="@style/Widget.AppCompat.Button.Borderless"/>
 
             <ImageButton
+                android:src="@drawable/henda"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/hendaButton"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <ImageButton
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,12 +84,7 @@
                 android:src="@drawable/color"
                 android:id="@+id/colorButton"
                 style="@style/Widget.AppCompat.Button.Borderless"/>
-            <ImageButton
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/circle_icon"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+
 
         </LinearLayout>
 
