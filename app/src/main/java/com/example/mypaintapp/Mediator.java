@@ -1,9 +1,7 @@
 package com.example.mypaintapp;
 
-import android.graphics.Canvas;
 import android.widget.TextView;
 
-import java.util.Enumeration;
 import java.util.Vector;
 
 public class Mediator {
@@ -61,7 +59,11 @@ public class Mediator {
         }
     }
 
-    void touchUp(int x, int y){}
+    void touchUp(int x, int y){
+        if(state!=null){
+            state.touchUp(x, y);
+        }
+    }
 
     void touchMove(int x, int y){
         if(state!=null){
@@ -76,4 +78,39 @@ public class Mediator {
     void setStatusText(String s){
         statusbar.setText(s);
     }
+
+    void changeSelectedFillColor(int c){
+        for(MyDrawing d:selectedDrawings){
+            d.fillColor = c;
+        }
+    }
+
+    public void move(int dx, int dy){
+        for(MyDrawing d : selectedDrawings){
+            d.move(dx,dy);
+        }
+        repaint();
+    }
+
+    boolean containsSelected(int x, int y,MyDrawing neglect){
+        for(MyDrawing d:selectedDrawings){
+            if(d.region.contains(x,y) && d!=neglect){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean removeSelected(){//if something is deleted, return true
+        boolean b = false;
+        for(MyDrawing d:selectedDrawings){
+            if(drawings.contains(d)){
+                drawings.remove(d);
+                b = true;
+            }
+        }
+        repaint();
+        return b;
+    }
+
 }

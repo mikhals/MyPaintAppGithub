@@ -62,4 +62,9 @@ public class MyHendacagonal extends MyDrawing {
 
 
     }
+
+    @Override
+    public String toString() {
+        return "Hendacagonal";
+    }
 }

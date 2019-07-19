@@ -23,4 +23,9 @@ public class MyOval extends MyDrawing {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "Oval";
+    }
 }

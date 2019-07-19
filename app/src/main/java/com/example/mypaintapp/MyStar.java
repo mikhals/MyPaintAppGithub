@@ -1,14 +1,11 @@
 package com.example.mypaintapp;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-import java.util.Collection;
-
 public class MyStar extends MyDrawing {
-    int OFFSET_OUTLINE = 15;
+    int OFFSET_OUTLINE = 25;
     public MyStar(){
         super();
     }
@@ -55,5 +52,10 @@ public class MyStar extends MyDrawing {
         canvas.drawPath(path, paint);
 
 
+    }
+
+    @Override
+    public String toString() {
+        return "Star";
     }
 }

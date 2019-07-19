@@ -13,7 +13,6 @@ public class CanvasView extends View {
 
     Mediator mediator;
     Paint paint;
-    int cH = 40;
 
     public CanvasView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
@@ -44,8 +43,11 @@ public class CanvasView extends View {
 
 
         for(MyDrawing d:mediator.drawings){
-            for(MyDrawing selected:mediator.selectedDrawings){
-                if(mediator.drawings.contains(selected)){
+
+
+
+            for(MyDrawing selected:mediator.drawings){
+                if(mediator.selectedDrawings.contains(selected)){
                     selected.setSelected(true);
                 }else {
                     selected.setSelected(false);
@@ -74,8 +76,11 @@ public class CanvasView extends View {
 
             case MotionEvent.ACTION_MOVE:
                 mediator.touchMove(x,y);
+                return true;
 
             case MotionEvent.ACTION_UP:
+                mediator.touchUp(x,y);
+                return true;
         }
 
 
@@ -87,22 +92,10 @@ public class CanvasView extends View {
         return false ;
     }
 
-    public void setcH(int cH) {
-        this.cH = cH;
-        repaint();
-    }
 
     void reset(){
         mediator.drawings.removeAllElements();
         invalidate();
-    }
-
-    void setSize(int i){
-        for(MyDrawing d: mediator.drawings){
-            d.setSize(i);
-
-        }
-        repaint();
     }
 
     public Mediator getMediator() {

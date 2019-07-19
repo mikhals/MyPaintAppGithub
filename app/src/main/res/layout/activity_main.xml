@@ -61,6 +61,14 @@
                 android:id="@+id/colorButton"
                 style="@style/Widget.AppCompat.Button.Borderless"/>
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/delete_icon"
+                android:id="@+id/deleteButton"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
         </LinearLayout>
     </HorizontalScrollView>
 

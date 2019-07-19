@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnHenda = findViewById(R.id.hendaButton);
         btnStar = findViewById(R.id.starButton);
         btnSelect = findViewById(R.id.selectButton);
+        btnDelete = findViewById(R.id.deleteButton);
         mediator.setStatusbar(statusText);
 
 
@@ -106,7 +107,19 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             @Override
             public void onClick(View view) {
                 //do
+                mediator.setState(new SelectState(mediator));
                 mediator.setStatusText("Select drawing(s)");
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediator.removeSelected()){
+                    mediator.setStatusText("Removed selected drawing(s)");
+                }else{
+                    mediator.setStatusText("Nothing to delete");
+                }
+
             }
         });
     }
@@ -115,12 +128,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     @Override
     public void onColorSelected(int dialogId, int color) {
         if(dialogId==2){
-            if(!mediator.drawings.isEmpty()){
+            if(!mediator.selectedDrawings.isEmpty()){
                 mediator.setStatusText("Color changed");
-                mediator.getLastDrawing().fillColor = color;
+//                mediator.getLastDrawing().fillColor = color;
+                mediator.changeSelectedFillColor(color);
                 mediator.repaint();
             }else{
-                mediator.setStatusText("Drawings is empty");
+                mediator.setStatusText("Nothing is selected. Please select something");
             }
 
         }
