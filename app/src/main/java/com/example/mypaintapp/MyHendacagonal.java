@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class MyHendacagonal extends MyDrawing {
+    int type = HENDA;
     int OFFSET_OUTLINE = 5;
 
     public MyHendacagonal(){
@@ -67,4 +68,17 @@ public class MyHendacagonal extends MyDrawing {
     public String toString() {
         return "Hendacagonal";
     }
+    public MyDrawing myClone(){
+        MyDrawing clone=new MyHendacagonal();
+        clone.setCoordinate(x,y);
+        clone.w = w;clone.h = h;
+        clone.setPivot(pivot.x,pivot.y);
+        clone.fillColor = fillColor;
+        clone.lineColor = lineColor;
+        clone.outlineWidth = outlineWidth;
+        clone.paint = paint;
+        clone.region = region;
+        return clone;
+    }
+
 }

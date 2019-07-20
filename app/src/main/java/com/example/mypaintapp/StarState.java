@@ -9,6 +9,7 @@ public class StarState extends State {
     @Override
     void touchDown(int x, int y) {
         MyDrawing star = new MyStar();
+        star.setFillColor(mediator.currentColor);
         star.setCoordinate(x,y);
         star.setPivot(x,y);
         mediator.addDrawing(star);

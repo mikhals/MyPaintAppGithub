@@ -3,6 +3,7 @@ package com.example.mypaintapp;
 import android.graphics.Canvas;
 
 public class MyRectangle extends MyDrawing{
+    int type = RECT;
     public MyRectangle(){
         super();
     }
@@ -26,5 +27,18 @@ public class MyRectangle extends MyDrawing{
     @Override
     public String toString() {
         return "Rectangle";
+    }
+
+    public MyDrawing myClone(){
+        MyDrawing clone=new MyRectangle();
+        clone.setCoordinate(x,y);
+        clone.w = w;clone.h = h;
+        clone.setPivot(pivot.x,pivot.y);
+        clone.fillColor = fillColor;
+        clone.lineColor = lineColor;
+        clone.outlineWidth = outlineWidth;
+        clone.paint = paint;
+        clone.region = region;
+        return clone;
     }
 }

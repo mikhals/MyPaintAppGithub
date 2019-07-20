@@ -7,6 +7,7 @@ public class HendaState extends State {
     @Override
     void touchDown(int x, int y) {
         MyDrawing henda = new MyHendacagonal();
+        henda.setFillColor(mediator.currentColor);
         henda.setCoordinate(x,y);
         henda.setPivot(x,y);
         mediator.addDrawing(henda);

@@ -9,6 +9,7 @@ public class RectState extends State {
     @Override
     void touchDown(int x, int y) {
         MyDrawing rect = new MyRectangle();
+        rect.setFillColor(mediator.currentColor);
         rect.setCoordinate(x,y);
         rect.setPivot(x,y);
         mediator.addDrawing(rect);

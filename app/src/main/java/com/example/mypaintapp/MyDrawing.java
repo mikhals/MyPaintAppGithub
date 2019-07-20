@@ -6,12 +6,13 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-public class MyDrawing {
+public class MyDrawing implements Cloneable {
+    int RECT =0,OVAL = 1, HENDA = 2, STAR=3;
     int x,y,w,h,fillColor,lineColor,outlineWidth;
     boolean isSelected;
     Point pivot;
     Paint paint;
-    int SIZE = 25;
+    int SIZE = 15;
     Rect region;
 
     public MyDrawing(){
@@ -73,5 +74,22 @@ public class MyDrawing {
 
     void move(int dx, int dy){
         setCoordinate(pivot.x+dx,pivot.y+dy);
+    }
+
+    public MyDrawing myClone(){
+        MyDrawing clone=new MyDrawing();
+        clone.setCoordinate(x,y);
+        clone.w = w;clone.h = h;
+        clone.setPivot(pivot.x,pivot.y);
+        clone.fillColor = fillColor;
+        clone.lineColor = lineColor;
+        clone.outlineWidth = outlineWidth;
+        clone.paint = paint;
+        clone.region = region;
+        return clone;
+    }
+
+    public void setFillColor(int fillColor) {
+        this.fillColor = fillColor;
     }
 }

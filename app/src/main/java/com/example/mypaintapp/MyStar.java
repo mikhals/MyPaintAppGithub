@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class MyStar extends MyDrawing {
+    int type = STAR;
     int OFFSET_OUTLINE = 25;
     public MyStar(){
         super();
@@ -57,5 +58,17 @@ public class MyStar extends MyDrawing {
     @Override
     public String toString() {
         return "Star";
+    }
+    public MyDrawing myClone(){
+        MyDrawing clone=new MyStar();
+        clone.setCoordinate(x,y);
+        clone.w = w;clone.h = h;
+        clone.setPivot(pivot.x,pivot.y);
+        clone.fillColor = fillColor;
+        clone.lineColor = lineColor;
+        clone.outlineWidth = outlineWidth;
+        clone.paint = paint;
+        clone.region = region;
+        return clone;
     }
 }

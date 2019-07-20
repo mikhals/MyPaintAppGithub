@@ -59,6 +59,8 @@ public class CanvasView extends View {
 //        for(MyDrawing drawing: drawings){
 //            drawing.draw(canvas);
 //        }
+        mediator.setCanvas(canvas);
+
     }
 
     void repaint(){

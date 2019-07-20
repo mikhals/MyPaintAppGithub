@@ -5,11 +5,14 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 public class SelectState extends State {
+    int mode;
+    final int MOVE=0,SELECT=1;
     MyDrawing selector;
     Point pivot = new Point();
 
     public SelectState(Mediator mediator){
         this.mediator = mediator;
+        mode=SELECT;
 
 
     }
@@ -26,6 +29,7 @@ public class SelectState extends State {
 
 
         if(!mediator.containsSelected(x,y,selector)){
+            mode=SELECT;
 //            if(mediator.selectedDrawings.isEmpty()){
             mediator.addDrawing(selector);
             selector.setPaint(paint);
@@ -35,14 +39,13 @@ public class SelectState extends State {
             mediator.repaint();
         }else{
             pivot.set(x, y);
+            mode=MOVE;
         }
     }
 
     @Override
     void touchMove(int x, int y) {
-        System.out.println(mediator.selectedDrawings.size());
-
-        if(!mediator.containsSelected(x,y,selector)){
+        if(mode==SELECT){
             selector.setSize(Math.abs(x - selector.pivot.x),Math.abs(y - selector.pivot.y));
             selector.setCoordinate(Math.min(x,selector.pivot.x),Math.min(y,selector.pivot.y));
 //        rect.setCoordinate(Math.min(x,rect.pivot.x),Math.min(y,rect.pivot.y));
@@ -55,7 +58,7 @@ public class SelectState extends State {
                 }
             }
             mediator.repaint();
-            mediator.setStatusText("Selected: " + mediator.selectedDrawings);
+            mediator.setStatusText("Selected("+(mediator.selectedDrawings.size())+"): " + mediator.selectedDrawings);
 
         }else {
             int dx = x - pivot.x;

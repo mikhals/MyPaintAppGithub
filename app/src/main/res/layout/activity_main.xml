@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="25sp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -32,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/canvas" />
 
     <HorizontalScrollView
+        android:scrollbars="none"
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/new_page_icon" />
+                android:src="@drawable/new_page_icon"
+                android:scrollbars="none"/>
 
             <ImageButton
                 android:id="@+id/selectButton"
@@ -56,6 +58,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/select" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/copy_icon"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/copyButton"/>
 
             <ImageButton
                 android:id="@+id/colorButton"

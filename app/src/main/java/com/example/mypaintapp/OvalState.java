@@ -8,6 +8,7 @@ public class OvalState extends State {
     @Override
     void touchDown(int x, int y) {
         MyDrawing oval = new MyOval();
+        oval.setFillColor(mediator.currentColor);
         oval.setCoordinate(x,y);
         oval.setPivot(x,y);
         mediator.addDrawing(oval);

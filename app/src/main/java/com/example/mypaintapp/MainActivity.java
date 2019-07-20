@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnStar = findViewById(R.id.starButton);
         btnSelect = findViewById(R.id.selectButton);
         btnDelete = findViewById(R.id.deleteButton);
+        btnCopy = findViewById(R.id.copyButton);
         mediator.setStatusbar(statusText);
-
+        mediator.setFilerDir(getFilesDir());
 
         btnRect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,19 +123,36 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
             }
         });
+        btnCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+//                mediator.savepic(getFilesDir().getAbsolutePath());
+                //
+                if(mediator.selectedDrawings.isEmpty()){
+                    mediator.setStatusText("Nothing is selected");
+                }else{
+                    mediator.copy();
+                    mediator.setState(new CopyState(mediator));
+                    mediator.setStatusText("Copied to buffer, ready to be paste");
+                }
+            }
+        });
     }
 
 
     @Override
     public void onColorSelected(int dialogId, int color) {
         if(dialogId==2){
+            btnColor.setBackgroundColor(color);
+            mediator.currentColor = color;
             if(!mediator.selectedDrawings.isEmpty()){
                 mediator.setStatusText("Color changed");
 //                mediator.getLastDrawing().fillColor = color;
                 mediator.changeSelectedFillColor(color);
                 mediator.repaint();
             }else{
-                mediator.setStatusText("Nothing is selected. Please select something");
+//                mediator.setStatusText("Nothing is selected. Please select something");
             }
 
         }

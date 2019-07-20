@@ -1,20 +1,33 @@
 package com.example.mypaintapp;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Vector;
 
 public class Mediator {
-    Vector<MyDrawing> drawings,selectedDrawings;
+    Vector<MyDrawing> drawings,selectedDrawings,buffers;
     CanvasView canvasView;
     State state;
     TextView statusbar;
+    Canvas canvas;
+    File filerDir;
+    int currentColor;
+    int canvasH,canvasW;
 
     public Mediator(CanvasView canvasView){
         this.canvasView = canvasView;
         drawings = new Vector<>();
         selectedDrawings = new Vector<>();
+        buffers = new Vector<>();
         state = null;
+        currentColor = Color.WHITE;
     }
 
     public void addDrawing(MyDrawing d){
@@ -29,9 +42,6 @@ public class Mediator {
         selectedDrawings.add(d);
     }
 
-    public void removeSelectedDrawing(MyDrawing d){
-        selectedDrawings.remove(d);
-    }
 
     public void repaint(){
         canvasView.invalidate();
@@ -48,7 +58,6 @@ public class Mediator {
     }
 
     void touchDown(int x, int y){
-        System.out.println(state);
 //
 //        RectState rectS = new RectState(this);
 //        setState(rectS);
@@ -113,4 +122,83 @@ public class Mediator {
         return b;
     }
 
+    void clearBuffers(){
+        buffers = new Vector<>();
+    }
+
+    void copy(){
+        clearBuffers();
+        for(MyDrawing d:selectedDrawings){
+            buffers.add(d.myClone());
+        }
+    }
+
+    void cut(){
+        clearBuffers();
+        copy();
+        selectedDrawings.removeAllElements();
+    }
+
+    void paste(int x, int y){
+        Vector<MyDrawing> clone = new Vector<>();
+
+        for(MyDrawing d:buffers){
+            clone.add(d.myClone());
+        }
+
+//        Vector<MyDrawing> clone = new Vector<>(buffers);
+        Point topLeft= new Point(), bottomRight = new Point();
+        MyDrawing firstElement = clone.firstElement();
+        topLeft.set(firstElement.x,firstElement.y);
+        bottomRight.set(firstElement.x+firstElement.w,firstElement.y+firstElement.h);
+
+
+        for(MyDrawing d:clone){
+            topLeft.set(Math.min(topLeft.x,d.x),Math.min(topLeft.y,d.y));
+            bottomRight.set(Math.max(bottomRight.x,d.x+d.w),Math.max(bottomRight.y,d.y+d.h));
+        }
+
+        for(MyDrawing d:clone){
+            int diffX = bottomRight.x-topLeft.x;
+            int diffY = bottomRight.y - topLeft.y;
+//            d.setCoordinate(0,0);
+//            d.setPivot(0,0);
+            int newX = d.x - topLeft.x + x -diffX;
+            int newY = d.y - topLeft.y + y -diffY;
+            d.setCoordinate(newX,newY);
+            d.setPivot(newX,newY);
+        }
+
+
+        for(MyDrawing d:clone){
+            drawings.add(d);
+        }
+        repaint();
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
+        canvasH = canvas.getHeight();
+        canvasW = canvas.getWidth();
+        System.out.println("h = "+canvasH+", W = "+canvasW);
+    }
+
+
+    public void setFilerDir(File filerDir) {
+        this.filerDir = filerDir;
+    }
+
+    void savepic(String file){
+
+        String filename = "/storage/emulated/0/a.jpg";
+        Bitmap myBitmap = Bitmap.createBitmap( canvasW, canvasH, Bitmap.Config.RGB_565 );
+        canvas.drawBitmap(myBitmap,0,0,null);
+        try (FileOutputStream out = new FileOutputStream(filename)) {
+            myBitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setStatusText("Saved to :"+filename);
+        System.out.println("Saved to :"+filename);
+    }
 }

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public class MyOval extends MyDrawing {
+    int type = OVAL;
     public MyOval(){
         super();
     }
@@ -27,5 +28,18 @@ public class MyOval extends MyDrawing {
     @Override
     public String toString() {
         return "Oval";
+    }
+
+    public MyDrawing myClone(){
+        MyDrawing clone=new MyOval();
+        clone.setCoordinate(x,y);
+        clone.w = w;clone.h = h;
+        clone.setPivot(pivot.x,pivot.y);
+        clone.fillColor = fillColor;
+        clone.lineColor = lineColor;
+        clone.outlineWidth = outlineWidth;
+        clone.paint = paint;
+        clone.region = region;
+        return clone;
     }
 }
