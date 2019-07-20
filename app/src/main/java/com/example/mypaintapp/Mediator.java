@@ -134,9 +134,14 @@ public class Mediator {
     }
 
     void cut(){
-        clearBuffers();
+//        clearBuffers();
         copy();
-        selectedDrawings.removeAllElements();
+        removeSelected();
+//        for(MyDrawing d:selectedDrawings){
+//            if(drawings.contains(d)){
+//                drawings.remove(d);
+//            }
+//        }
     }
 
     void paste(int x, int y){

@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy,btnCut;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnSelect = findViewById(R.id.selectButton);
         btnDelete = findViewById(R.id.deleteButton);
         btnCopy = findViewById(R.id.copyButton);
+        btnCut = findViewById(R.id.cut_button);
         mediator.setStatusbar(statusText);
         mediator.setFilerDir(getFilesDir());
 
@@ -48,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             public void onClick(View view) {
                 mediator.setState(new RectState(mediator));
                 mediator.setStatusText("Rectangle");
+            }
+        });
+        btnRect.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Create rectangle shape");
+                return true;
             }
         });
         btnReset.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 }).create().show();
             }
         });
+        btnReset.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Create new canvas");
+                return true;
+            }
+        });
         btnOval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,10 +91,24 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 mediator.setStatusText("Oval");
             }
         });
+        btnOval.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Create Oval shape");
+                return true;
+            }
+        });
         btnColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ColorPickerDialog.newBuilder().setColor(Color.WHITE).setDialogId(2).show(activity);
+            }
+        });
+        btnColor.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Set color for selected drawing and next drawing");
+                return true;
             }
         });
         btnHenda.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnHenda.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                mediator.setStatusText("Custom polygon");
+                mediator.setStatusText("Help: Create 11-sided polygon");
                 return true;
             }
         });
@@ -104,12 +133,26 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 mediator.setStatusText("Star");
             }
         });
+        btnStar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Create star shape");
+                return true;
+            }
+        });
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //do
                 mediator.setState(new SelectState(mediator));
                 mediator.setStatusText("Select drawing(s)");
+            }
+        });
+        btnSelect.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Select drawing(s)");
+                return true;
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +164,13 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                     mediator.setStatusText("Nothing to delete");
                 }
 
+            }
+        });
+        btnDelete.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Delete selected drawing(s)");
+                return true;
             }
         });
         btnCopy.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +186,32 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                     mediator.setState(new CopyState(mediator));
                     mediator.setStatusText("Copied to buffer, ready to be paste");
                 }
+            }
+        });
+        btnCopy.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Copy selected drawing(s) to buffer");
+                return true;
+            }
+        });
+        btnCut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediator.selectedDrawings.isEmpty()){
+                    mediator.setStatusText("Nothing is selected");
+                }else{
+                    mediator.cut();
+                    mediator.setState(new CutState(mediator));
+                    mediator.setStatusText("Copied to buffer, ready to be paste");
+                }
+            }
+        });
+        btnCut.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Cut selected drawing(s) to buffer");
+                return true;
             }
         });
     }
