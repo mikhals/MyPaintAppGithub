@@ -101,6 +101,7 @@ public class Mediator {
         repaint();
     }
 
+
     boolean containsSelected(int x, int y,MyDrawing neglect){
         for(MyDrawing d:selectedDrawings){
             if(d.region.contains(x,y) && d!=neglect){

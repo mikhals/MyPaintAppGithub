@@ -105,6 +105,8 @@ public class CanvasView extends View {
     }
 
 
+
+
     //    public void setCurrentDrawing(MyDrawing currentDrawing) {
 //        this.currentDrawing = currentDrawing;
 //    }
