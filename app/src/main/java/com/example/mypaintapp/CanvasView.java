@@ -12,40 +12,17 @@ public class CanvasView extends View {
 
 
     Mediator mediator;
-    Paint paint;
 
     public CanvasView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
         setBackgroundColor(Color.WHITE);
         mediator = new Mediator(this);
-//        setBackgroundColor(Color.rgb(230,230,230));
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
     }
-
-//    public MyCanvas(Context context, Mediator mediator, Canvas canvasView){
-//        super(context);
-//        this.mediator = mediator;
-//        this.canvasView = canvasView;
-//
-//        canvasView.drawCircle(5,5,50,new Paint());
-//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-
-//        canvas.drawRect();
-//        for(Rect rect : rects){
-//            rect.bottom=cH+rect.left;
-//            canvas.drawRect(rect,paint);
-//        }
-
-
         for(MyDrawing d:mediator.drawings){
-
-
-
             for(MyDrawing selected:mediator.drawings){
                 if(mediator.selectedDrawings.contains(selected)){
                     selected.setSelected(true);
@@ -56,9 +33,6 @@ public class CanvasView extends View {
             d.draw(canvas);
         }
 
-//        for(MyDrawing drawing: drawings){
-//            drawing.draw(canvas);
-//        }
         mediator.setCanvas(canvas);
 
     }
@@ -84,13 +58,6 @@ public class CanvasView extends View {
                 mediator.touchUp(x,y);
                 return true;
         }
-
-
-
-
-
-
-
         return false ;
     }
 
@@ -105,10 +72,4 @@ public class CanvasView extends View {
         return mediator;
     }
 
-
-
-
-    //    public void setCurrentDrawing(MyDrawing currentDrawing) {
-//        this.currentDrawing = currentDrawing;
-//    }
 }

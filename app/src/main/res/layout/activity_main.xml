@@ -63,7 +63,7 @@
             <ImageButton
                 android:id="@+id/cut_button"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:src="@drawable/cuticon"
+                android:src="@drawable/cut_icon"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -75,6 +75,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/color" />
+
+            <ImageButton
+                android:id="@+id/shadowButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/shadow_icon" />
 
             <ImageButton
                 android:id="@+id/deleteButton"

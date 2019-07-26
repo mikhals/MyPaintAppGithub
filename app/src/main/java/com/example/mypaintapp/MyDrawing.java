@@ -9,14 +9,15 @@ import android.graphics.Rect;
 public class MyDrawing implements Cloneable {
     int RECT =0,OVAL = 1, HENDA = 2, STAR=3;
     int x,y,w,h,fillColor,lineColor,outlineWidth;
-    boolean isSelected;
+    boolean isSelected,isShadow;
     Point pivot;
     Paint paint;
     int SIZE = 15;
+    int SHADOW_OFFSET = 10;
     Rect region;
 
     public MyDrawing(){
-        isSelected = false;
+        isSelected = isShadow = false;
         x = y = 0;
         w = h = 40;
         outlineWidth = 5;

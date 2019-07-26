@@ -1,6 +1,7 @@
 package com.example.mypaintapp;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
@@ -14,6 +15,12 @@ public class MyStar extends MyDrawing {
     @Override
     void draw(Canvas canvas) {
 //        super.draw(canvas);
+
+        if(isShadow){
+            paint.setColor(Color.BLACK);
+            drawStar(canvas,paint,x+w/2+SHADOW_OFFSET,y+h/2+SHADOW_OFFSET,w+outlineWidth+OFFSET_OUTLINE+SHADOW_OFFSET,h+outlineWidth+OFFSET_OUTLINE+SHADOW_OFFSET);
+        }
+
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(lineColor);
         drawStar(canvas,paint,x+w/2,y+h/2,w+outlineWidth+OFFSET_OUTLINE,h+outlineWidth+OFFSET_OUTLINE);
