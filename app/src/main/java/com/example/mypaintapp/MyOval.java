@@ -1,6 +1,7 @@
 package com.example.mypaintapp;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 public class MyOval extends MyDrawing {
@@ -12,6 +13,11 @@ public class MyOval extends MyDrawing {
     @Override
     void draw(Canvas canvas) {
 //        super.draw(canvas);
+        if(isShadow){
+            paint.setColor(Color.BLACK);
+            canvas.drawOval(x-outlineWidth+SHADOW_OFFSET,y-outlineWidth+SHADOW_OFFSET,x+w+outlineWidth+SHADOW_OFFSET,y+h+outlineWidth+SHADOW_OFFSET,paint);
+        }
+
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(lineColor);
         canvas.drawOval(x-outlineWidth,y-outlineWidth,x+w+outlineWidth,y+h+outlineWidth,paint);

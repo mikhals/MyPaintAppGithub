@@ -207,4 +207,11 @@ public class Mediator {
         setStatusText("Saved to :"+filename);
         System.out.println("Saved to :"+filename);
     }
+
+    void toggleShadow(){
+        for(MyDrawing d:selectedDrawings){
+            d.isShadow=!d.isShadow;
+        }
+        repaint();
+    }
 }

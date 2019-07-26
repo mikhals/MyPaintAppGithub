@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     MainActivity activity = this;
     Mediator mediator;
     CanvasView canvasView;
-    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy,btnCut,btnSave;
+    ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy,btnCut,btnSave,btnShadow;
 //    Button btnReset,btnOval,btnColor;
     TextView statusText;
     int time_pressed;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnCopy = findViewById(R.id.copyButton);
         btnCut = findViewById(R.id.cut_button);
         btnSave = findViewById(R.id.saveButton);
+        btnShadow = findViewById(R.id.shadowButton);
         mediator.setStatusbar(statusText);
         mediator.setFilerDir(getFilesDir());
 
@@ -248,6 +249,19 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             @Override
             public boolean onLongClick(View view) {
                 mediator.setStatusText("Help: Save canvas to Pictures");
+                return true;
+            }
+        });
+        btnShadow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mediator.toggleShadow();
+            }
+        });
+        btnShadow.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mediator.setStatusText("Help: Toggle shadow for selected drawing");
                 return true;
             }
         });
