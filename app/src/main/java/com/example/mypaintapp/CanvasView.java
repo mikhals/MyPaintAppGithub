@@ -12,15 +12,12 @@ public class CanvasView extends View {
 
 
     Mediator mediator;
-    Paint paint;
 
     public CanvasView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
         setBackgroundColor(Color.WHITE);
         mediator = new Mediator(this);
 //        setBackgroundColor(Color.rgb(230,230,230));
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
     }
 
 //    public MyCanvas(Context context, Mediator mediator, Canvas canvasView){

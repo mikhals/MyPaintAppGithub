@@ -13,6 +13,7 @@ import java.util.Vector;
 
 public class Mediator {
     Vector<MyDrawing> drawings,selectedDrawings,buffers;
+    Vector<Vector<MyDrawing>> history;
     CanvasView canvasView;
     State state;
     TextView statusbar;
@@ -26,16 +27,19 @@ public class Mediator {
         drawings = new Vector<>();
         selectedDrawings = new Vector<>();
         buffers = new Vector<>();
+        history = new Vector<>();
         state = null;
         currentColor = Color.WHITE;
     }
 
     public void addDrawing(MyDrawing d){
         drawings.add(d);
+        history.add(drawings);
     }
 
     public void removeDrawing(MyDrawing d){
         drawings.remove(d);
+        addHistory(drawings);
     }
 
     public void addSelectedDrawing(MyDrawing d){
@@ -213,5 +217,12 @@ public class Mediator {
             d.isShadow=!d.isShadow;
         }
         repaint();
+    }
+
+    void addHistory(Vector<MyDrawing> v){
+        history.add(v);
+        System.out.println("History added: "+history.size());
+
+
     }
 }
