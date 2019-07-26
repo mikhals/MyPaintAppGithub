@@ -10,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -225,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 }else{
                     mediator.cut();
                     mediator.setState(new CutState(mediator));
-                    mediator.setStatusText("Copied to buffer, ready to be paste");
+                    mediator.setStatusText("Cut to buffer, ready to be paste");
                 }
             }
         });
@@ -252,6 +255,18 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             }
         });
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public void onGroupItemClick(MenuItem item) {
+        // One of the group items (using the onClick attribute) was clicked
+        // The item parameter passed here indicates which item it is
+        // All other menu item clicks are handled by <code><a href="/reference/android/app/Activity.html#onOptionsItemSelected(android.view.MenuItem)">onOptionsItemSelected()</a></code>
     }
 
 

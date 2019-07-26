@@ -97,6 +97,7 @@ public class CanvasView extends View {
 
     void reset(){
         mediator.drawings.removeAllElements();
+        mediator.selectedDrawings.removeAllElements();
         invalidate();
     }
 
