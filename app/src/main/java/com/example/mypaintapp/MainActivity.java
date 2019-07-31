@@ -38,14 +38,11 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     Mediator mediator;
     CanvasView canvasView;
     ImageButton btnRect,btnReset,btnOval,btnColor,btnHenda,btnStar,btnSelect,btnDelete,btnCopy,btnCut,btnSave,btnShadow;
-//    Button btnReset,btnOval,btnColor;
     TextView statusText;
-    int time_pressed;
     AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        time_pressed=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnRect = findViewById(R.id.rect_button);
@@ -66,13 +63,9 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         mediator.setStatusbar(statusText);
         mediator.setFilerDir(getFilesDir());
 
-
-
-
         btnRect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mediator.setState(new RectState(mediator));
                 mediator.setStatusText("Rectangle");
             }
@@ -189,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
                 }else{
                     mediator.setStatusText("Nothing to delete");
                 }
-
             }
         });
         btnDelete.setOnLongClickListener(new View.OnLongClickListener() {
@@ -202,9 +194,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         btnCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
-//                mediator.savepic(getFilesDir().getAbsolutePath());
-                //
                 if(mediator.selectedDrawings.isEmpty()){
                     mediator.setStatusText("Nothing is selected");
                 }else{
@@ -345,13 +334,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     private void saveImage(Bitmap finalBitmap, String image_name) {
 
         Calendar cal = Calendar.getInstance();
-                /*
-                Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                i.addCategory(Intent.CATEGORY_DEFAULT);
-                startActivityForResult(Intent.createChooser(i, "Choose directory"), 9999);
-                System.out.println(i.getData());
-                System.out.println("_"+cal.get(YEAR)+cal.get(MONTH)+cal.get(DAY_OF_MONTH)+cal.get(Calendar.HOUR_OF_DAY)+"-"+cal.get(Calendar.MINUTE)+"-"+cal.get(Calendar.SECOND));
-*/
         String name = "_"+cal.get(YEAR)+cal.get(MONTH)+cal.get(DAY_OF_MONTH)+cal.get(Calendar.HOUR_OF_DAY)+"-"+cal.get(Calendar.MINUTE)+"-"+cal.get(Calendar.SECOND);
 
 
