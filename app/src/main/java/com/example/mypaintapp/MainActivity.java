@@ -277,6 +277,24 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.redo_icon:
+                mediator.redo();
+                break;
+            case R.id.undo_action:
+                mediator.undo();
+                break;
+            default:
+                //
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void onGroupItemClick(MenuItem item) {
         // One of the group items (using the onClick attribute) was clicked
         // The item parameter passed here indicates which item it is

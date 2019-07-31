@@ -75,7 +75,7 @@ public class SelectState extends State {
             d.setPivot(d.x,d.y);
         }
         if(mode==MOVE){
-            mediator.addHistory(mediator.drawings);
+//            mediator.addHistory(mediator.drawings);
         }
         mediator.removeDrawing(selector);
         mediator.repaint();

@@ -14,6 +14,7 @@ import java.util.Vector;
 public class Mediator {
     Vector<MyDrawing> drawings,selectedDrawings,buffers;
     Vector<Vector<MyDrawing>> history;
+    int history_now;
     CanvasView canvasView;
     State state;
     TextView statusbar;
@@ -28,13 +29,14 @@ public class Mediator {
         selectedDrawings = new Vector<>();
         buffers = new Vector<>();
         history = new Vector<>();
+        history_now=0;
         state = null;
         currentColor = Color.WHITE;
     }
 
     public void addDrawing(MyDrawing d){
         drawings.add(d);
-        history.add(drawings);
+        addHistory(drawings);
     }
 
     public void removeDrawing(MyDrawing d){
@@ -221,8 +223,22 @@ public class Mediator {
 
     void addHistory(Vector<MyDrawing> v){
         history.add(v);
-        System.out.println("History added: "+history.size());
+        System.out.println("History added: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+history.size());
 
 
+    }
+
+    void undo(){
+        if(true){
+            drawings=history.elementAt(history.size()-1);
+            history_now--;
+            setStatusText("Undo"+(history_now-1));
+            repaint();
+        }
+    }
+
+    void redo(){
+        setStatusText("Redo");
+        repaint();
     }
 }

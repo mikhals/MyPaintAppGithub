@@ -71,5 +71,4 @@ public class CanvasView extends View {
     public Mediator getMediator() {
         return mediator;
     }
-
 }
