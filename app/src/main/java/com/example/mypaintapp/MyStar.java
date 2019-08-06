@@ -14,7 +14,6 @@ public class MyStar extends MyDrawing {
 
     @Override
     void draw(Canvas canvas) {
-//        super.draw(canvas);
 
         if(isShadow){
             paint.setColor(Color.BLACK);

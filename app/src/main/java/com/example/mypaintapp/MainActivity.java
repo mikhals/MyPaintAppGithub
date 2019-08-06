@@ -260,36 +260,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.redo_icon:
-                mediator.redo();
-                break;
-            case R.id.undo_action:
-                mediator.undo();
-                break;
-            default:
-                //
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onGroupItemClick(MenuItem item) {
-        // One of the group items (using the onClick attribute) was clicked
-        // The item parameter passed here indicates which item it is
-        // All other menu item clicks are handled by <code><a href="/reference/android/app/Activity.html#onOptionsItemSelected(android.view.MenuItem)">onOptionsItemSelected()</a></code>
-    }
-
 
     @Override
     public void onColorSelected(int dialogId, int color) {
@@ -298,7 +268,6 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
             mediator.currentColor = color;
             if(!mediator.selectedDrawings.isEmpty()){
                 mediator.setStatusText("Color changed");
-//                mediator.getLastDrawing().fillColor = color;
                 mediator.changeSelectedFillColor(color);
                 mediator.repaint();
             }else{
@@ -354,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
         File myDir = new File(root);
         myDir.mkdirs();
         String fname = "/Canvas" + name+ ".jpg";
-//        String fname = "/Canvas" + image_name+ ".jpg";
+//        String fname = "/Canvas" + image_name+ ".jpg";//implementation if image name is given
         File file = new File(myDir, fname);
         if (file.exists()) file.delete();
         Log.i("LOAD", root + fname);

@@ -30,7 +30,6 @@ public class SelectState extends State {
 
         if(!mediator.containsSelected(x,y,selector)){
             mode=SELECT;
-//            if(mediator.selectedDrawings.isEmpty()){
             mediator.addDrawing(selector);
             selector.setPaint(paint);
 
@@ -48,7 +47,6 @@ public class SelectState extends State {
         if(mode==SELECT){
             selector.setSize(Math.abs(x - selector.pivot.x),Math.abs(y - selector.pivot.y));
             selector.setCoordinate(Math.min(x,selector.pivot.x),Math.min(y,selector.pivot.y));
-//        rect.setCoordinate(Math.min(x,rect.pivot.x),Math.min(y,rect.pivot.y));
             mediator.selectedDrawings.removeAllElements();
             for(MyDrawing drawing:mediator.drawings){
                 if(selector.region.contains(drawing.region) && drawing!=selector){
@@ -75,7 +73,6 @@ public class SelectState extends State {
             d.setPivot(d.x,d.y);
         }
         if(mode==MOVE){
-//            mediator.addHistory(mediator.drawings);
         }
         mediator.removeDrawing(selector);
         mediator.repaint();

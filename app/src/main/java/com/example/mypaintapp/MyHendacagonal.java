@@ -15,7 +15,6 @@ public class MyHendacagonal extends MyDrawing {
 
     @Override
     void draw(Canvas canvas) {
-//        super.draw(canvas);
         if(isShadow){
             paint.setColor(Color.BLACK);
             drawHenda(canvas,paint,x+(w/2)+SHADOW_OFFSET,y+(h/2)+SHADOW_OFFSET,w+outlineWidth + OFFSET_OUTLINE+SHADOW_OFFSET,h+outlineWidth + OFFSET_OUTLINE+SHADOW_OFFSET);
@@ -24,25 +23,10 @@ public class MyHendacagonal extends MyDrawing {
 
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(lineColor);
-//        canvas.drawOval(x-outlineWidth,y-outlineWidth,x+w+outlineWidth,y+h+outlineWidth,paint);
         drawHenda(canvas,paint,x+w/2,y+h/2,w+outlineWidth + OFFSET_OUTLINE,h+outlineWidth + OFFSET_OUTLINE);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(fillColor);
-//        canvas.drawOval(x,y,x+w,y+h,paint);
         drawHenda(canvas,paint,x+w/2,y+h/2,w,h);
-
-//        int halfWidth = 500 / 2;
-//
-//        Path path = new Path();
-//        path.moveTo(x+ halfWidth, y + halfWidth); // Top
-//        path.lineTo(x - halfWidth, y); // Left
-//        path.lineTo(x, y - halfWidth); // Bottom
-//        path.lineTo(x + halfWidth, y); // Right
-//        path.lineTo(x+ halfWidth, y + halfWidth); // Back to Top
-//        path.close();
-//
-//        canvas.drawPath(path, paint);
-
         if(isSelected){
             super.draw(canvas);
         }

@@ -12,7 +12,6 @@ public class MyOval extends MyDrawing {
 
     @Override
     void draw(Canvas canvas) {
-//        super.draw(canvas);
         if(isShadow){
             paint.setColor(Color.BLACK);
             canvas.drawOval(x-outlineWidth+SHADOW_OFFSET,y-outlineWidth+SHADOW_OFFSET,x+w+outlineWidth+SHADOW_OFFSET,y+h+outlineWidth+SHADOW_OFFSET,paint);

@@ -1,6 +1,5 @@
 package com.example.mypaintapp;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,14 +7,10 @@ import android.graphics.Point;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Vector;
 
 public class Mediator {
     Vector<MyDrawing> drawings,selectedDrawings,buffers;
-    Vector<Vector<MyDrawing>> history,redo;
-    int history_idx;
     CanvasView canvasView;
     State state;
     TextView statusbar;
@@ -29,21 +24,16 @@ public class Mediator {
         drawings = new Vector<>();
         selectedDrawings = new Vector<>();
         buffers = new Vector<>();
-        history = new Vector<>();
-        redo = new Vector<>();
-        history_idx =0;
         state = null;
         currentColor = Color.WHITE;
     }
 
     public void addDrawing(MyDrawing d){
         drawings.add(d);
-        addHistory();
     }
 
     public void removeDrawing(MyDrawing d){
         drawings.remove(d);
-        addHistory();
     }
 
     public void addSelectedDrawing(MyDrawing d){
@@ -66,11 +56,6 @@ public class Mediator {
     }
 
     void touchDown(int x, int y){
-//
-//        RectState rectS = new RectState(this);
-//        setState(rectS);
-//        state.touchDown(x,y);
-
         if(state!=null){
             state.touchDown(x,y);
         }
@@ -143,14 +128,8 @@ public class Mediator {
     }
 
     void cut(){
-//        clearBuffers();
         copy();
         removeSelected();
-//        for(MyDrawing d:selectedDrawings){
-//            if(drawings.contains(d)){
-//                drawings.remove(d);
-//            }
-//        }
     }
 
     void paste(int x, int y){
@@ -160,7 +139,6 @@ public class Mediator {
             clone.add(d.myClone());
         }
 
-//        Vector<MyDrawing> clone = new Vector<>(buffers);
         Point topLeft= new Point(), bottomRight = new Point();
         MyDrawing firstElement = clone.firstElement();
         topLeft.set(firstElement.x,firstElement.y);
@@ -175,8 +153,6 @@ public class Mediator {
         for(MyDrawing d:clone){
             int diffX = bottomRight.x-topLeft.x;
             int diffY = bottomRight.y - topLeft.y;
-//            d.setCoordinate(0,0);
-//            d.setPivot(0,0);
             int newX = d.x - topLeft.x + x -diffX;
             int newY = d.y - topLeft.y + y -diffY;
             d.setCoordinate(newX,newY);
@@ -202,92 +178,10 @@ public class Mediator {
         this.filerDir = filerDir;
     }
 
-    void savepic(String file){
-
-        String filename = "/storage/emulated/0/a.jpg";
-        Bitmap myBitmap = Bitmap.createBitmap( canvasW, canvasH, Bitmap.Config.RGB_565 );
-        canvas.drawBitmap(myBitmap,0,0,null);
-        try (FileOutputStream out = new FileOutputStream(filename)) {
-            myBitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setStatusText("Saved to :"+filename);
-        System.out.println("Saved to :"+filename);
-    }
-
     void toggleShadow(){
         for(MyDrawing d:selectedDrawings){
             d.isShadow=!d.isShadow;
         }
         repaint();
-    }
-
-    Vector<MyDrawing> getDrawings(){
-        Vector<MyDrawing> v = new Vector<>();
-        for(MyDrawing d:drawings){
-
-            if(d.paint.getStyle() != Paint.Style.STROKE){//selecting box is drawn at the same canvas, but the style is stroke. So to exclude it just refer by PaintStyle
-                v.add(d);
-            }
-        }
-        return v;
-    }
-
-    void addHistory(){
-        history.add(getDrawings());
-        redo.removeAllElements();
-        history_idx =history.size();
-        System.out.println("History int added: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+(history.size()-1));
-        System.out.println("loaded[re]:"+ history );
-        System.out.println("redo"+redo);
-
-
-    }
-
-    void undo(){
-//        if(history_idx-1>=0){
-//            history_idx--;
-//            drawings=history.elementAt(history_idx);
-//        }else if (history_idx-1==-1){
-//            history_idx--;
-//            drawings=new Vector<>();
-////            drawings=history.elementAt(0);
-//        }
-        if(!history.isEmpty()){
-            redo.add(history.lastElement());
-            history.remove(history.lastElement());
-            if(history.isEmpty()){
-                drawings = new Vector<>();//nothing
-            }else{
-                drawings = history.lastElement();
-            }
-        }else {
-            drawings = new Vector<>();//nothing
-        }
-        System.out.println("loaded[re]:"+ history );
-        System.out.println("redo"+redo);
-        repaint();
-        setStatusText("Undo");
-    }
-
-    void redo(){
-//        if(history_idx+1<history.size()){
-//            history_idx++;
-//            drawings=history.elementAt(history_idx);
-//        }else if(history_idx+1==history.size()){
-//            drawings=history.elementAt(history_idx);
-//        }
-        if(!redo.isEmpty()){
-            drawings = redo.lastElement();
-            history.add(redo.lastElement());
-            redo.remove(redo.lastElement());
-        }else{
-
-        }
-        System.out.println("loaded[re]:"+ history );
-        System.out.println("redo"+redo);
-        repaint();
-        setStatusText("Redo");
     }
 }
