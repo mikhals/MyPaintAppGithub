@@ -1,4 +1,4 @@
-# MyPaintApp
+# MyPaintApp (Android)
 Paint app for Android
 For Haru Jikken
 
